@@ -1,0 +1,80 @@
+title: First stab at Template Haskell
+author: Vo Minh Thu
+date: 2009.03.09
+
+   Template Haskell is a nice extension to Haskell. It is reminescent
+   of the macro mechanism as found in Scheme or Lisp. While in Lisp
+   the concrete syntax and the representation of the code, i.e. the
+   abstract syntax tree, have no difference, the abstract syntax tree
+   for TH is represented with normal Haskell datatypes.
+
+   The documentation of the [package] is quite terse but ghci is
+   a nice tool to get started. Start ghci with TH enabled, and load
+   the AST datatypes :
+
+    > ghci -XTemplateHaskell
+    ghci> :m + Language.Haskell.TH
+
+   [package]: http://hackage.haskell.org/cgi-bin/hackage-scripts/package/template-haskell
+
+   To see what is the datastructure needed by TH to generate the code
+   `\x -> 1`, we can run
+
+    ghci> runQ [| \x -> 1 |]
+    LamE [VarP x_0] (LitE (IntegerL 1))
+
+   The [| |] are called Oxford brackets and make it easy to get the AST
+   of some haskell code (E stands for expression and P for patterns).
+
+   We can see a function is a LamE object with some patterns (here,
+   just one variable) and a representation of an expression, the result
+   of the function (here, the literal 1).
+
+    ghci> :t it
+    it :: Exp
+
+   (`it` a is a special variable in ghci that allows us to reference the last
+   computed value.) So we have an Exp, represnting the Haskell code \x -> 1.
+
+   So how can we generate back the code from the Exp ? The answer lies in
+   another special syntax, $(...). The ... has to be of type ExpQ, an alias
+   for the type Q Exp. Q is the quotation monad which makes possible, in
+   particular, to draw unique identifiers (that's why there is a 0 appended
+   to the initial name x, in VarP x_0 above) and we can extract the resulting
+   Exp by using runQ.
+
+    ghci> $(return it)
+    <interactive>:1:0:
+        No instance for (Show (t1 -> t))
+          arising from a use of `print' at <interactive>:1:0-11
+        Possible fix: add an instance declaration for (Show (t1 -> t))
+        In a stmt of a 'do' expression: print it
+
+   The error message we get from ghci is precisely the same we would get if we'd
+   typed directly
+
+    ghci> \x -> 1
+
+   With something that can be actually printed :
+
+    ghci> runQ [| 1 + 2 |]
+    InfixE (Just (LitE (IntegerL 1))) (VarE GHC.Num.+) (Just (LitE (IntegerL 2)))
+    ghci> $(return it)
+    3
+
+   Note the possiblity to splice (i.e. use $(...)) inside a quotation :
+
+    ghci> runQ [| 1 + $([| 2 |]) |]
+    InfixE (Just (LitE (IntegerL 1))) (VarE GHC.Num.+) (Just (LitE (IntegerL 2)))
+
+   One more thing : the quotation we used was to create expressions and has type
+   Q Exp but there are also quotations for type signatures and declarations, which
+   have respectively the type Q Typ and Q [Dec].
+
+    ghci> runQ [t| IO Int |]
+    AppT (ConT GHC.IOBase.IO) (ConT GHC.Types.Int)
+
+    ghci> runQ [d| f a = 1 |]
+    [FunD f [Clause [VarP a_4] (NormalB (LitE (IntegerL 1))) []]]
+
+

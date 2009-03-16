@@ -1,0 +1,51 @@
+body {
+  font-size: 0.8em;
+  font-family: Verdana, sans-serif;
+  background: #fff;
+  width: 650px;
+}
+
+a { font-weight: bold; color: #009ECE; padding: 2px }
+a:link { text-decoration:none }
+a:visited { text-decoration:none }
+a:hover { text-decoration:none; color: #fff; background: #575234 }
+a:active { text-decoration:none }
+
+.notice {
+  font-size: 0.7em;
+  width: 200px;
+  color: #CD5C5C;
+  background: #F3EFE0;
+}
+.header-external-links {
+  border: 2px dotted #E0F3FA;
+}
+.header-external-links p { margin: 2px; }
+.header-external-links h4 { margin: 2px; }
+.author { color: #FF7900; font-weight: bold; }
+.date { color: #FF7900; font-weight: bold; }
+.prompt {
+  font-size: 1.4em;
+  background: #E0F3FA;
+  color: #00477F;
+}
+
+h1 {
+  color: #575234;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+h1 a {
+  color: #575234;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+h1 a:hover {
+  color: #575234;
+  font-weight: bold;
+  margin-bottom: 0px;
+  background: #fff;
+}
+
+h4 { font-weight: bold }
+
