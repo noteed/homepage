@@ -1,5 +1,5 @@
 body {
-  font-size: 0.8em;
+  font-size: 14px;
   font-family: Verdana, sans-serif;
   background: #fff;
   width: 650px;
@@ -12,7 +12,7 @@ a:hover { text-decoration:none; color: #fff; background: #575234 }
 a:active { text-decoration:none }
 
 .notice {
-  font-size: 0.7em;
+  font-size: 11px;
   width: 200px;
   color: #CD5C5C;
   background: #F3EFE0;
@@ -24,8 +24,14 @@ a:active { text-decoration:none }
 .header-external-links h4 { margin: 2px; }
 .author { color: #FF7900; font-weight: bold; }
 .date { color: #FF7900; font-weight: bold; }
+.code {
+  font-family: "Bitstream Vera Sans";
+  font-size: 14px;
+  color: #00477F;
+}
 .prompt {
-  font-size: 1.4em;
+  font-family: "Bitstream Vera Sans";
+  font-size: 14px;
   background: #E0F3FA;
   color: #00477F;
 }
