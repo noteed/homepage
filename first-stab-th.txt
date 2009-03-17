@@ -77,4 +77,10 @@ date: 2009.03.17
     ghci> runQ [d| f a = 1 |]
     [FunD f [Clause [VarP a_4] (NormalB (LitE (IntegerL 1))) []]]
 
+   Now, if you need to generate some Haskell code, you can write, in Haskell, a
+   function which produces a TH AST and then splice it. Beware that you can't
+   write a splice involving a function defined in the same file; you have to
+   import that function to use it. If it happens, you'll simply get a 'stage
+   restriction' error. Have fun with Haskell-generating Haskell.
+
 
