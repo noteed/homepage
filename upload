@@ -1,7 +1,0 @@
-#! /bin/sh
-cat index.first.html \
-    first-stab-th.body.html \
-    index.last.html \
-    > index.html
-scp index.html my.css wl500w:/www/
-scp first-stab-th.html wl500w:/www/entry/
