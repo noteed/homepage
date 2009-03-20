@@ -6,7 +6,7 @@ index.html: index.first.html first-stab-th.body.html index.last.html
 first-stab-th.html first-stab-th.body.html: first-stab-th.txt
 	carbonsuit -x $<
 
-uploaded-root: index.html my.css my-ga.js
+uploaded-root: index.html my.css my-ga.js favicon.ico
 	scp $? websv:/www/
 	touch uploaded-root
 
