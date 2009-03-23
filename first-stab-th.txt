@@ -3,7 +3,7 @@ author: Vo Minh Thu
 date: 2009.03.17
 
    Template Haskell is a nice extension to Haskell (but only available
-   in GHC as for now). It is reminescent
+   in GHC as for now). It is reminiscent
    of the macro mechanism as found in Scheme or Lisp. While in Lisp
    the concrete syntax and the representation of the code, i.e. the
    abstract syntax tree, have no difference, the abstract syntax tree
@@ -18,7 +18,7 @@ date: 2009.03.17
 
    [package]: http://hackage.haskell.org/cgi-bin/hackage-scripts/package/template-haskell
 
-   To see what is the datastructure needed by TH to generate the code
+   To see what is the data structure needed by TH to generate the code
    `\x -> 1`, we can run
 
     ghci> runQ [| \x -> 1 |]
@@ -63,7 +63,7 @@ date: 2009.03.17
     ghci> $(return it)
     3
 
-   Note the possiblity to splice (i.e. use `$(...)`) inside a quotation :
+   Note the possibility to splice (i.e. use `$(...)`) inside a quotation :
 
     ghci> runQ [| 1 + $([| 2 |]) |]
     InfixE (Just (LitE (IntegerL 1))) (VarE GHC.Num.+) (Just (LitE (IntegerL 2)))
